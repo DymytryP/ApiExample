@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Api", "Billing.Api\Billing.Api.csproj", "{E958251E-F336-4433-B10D-CE188BE680C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Infrastructure", "..\..\..\..\..\Projects\Programming\C#\ModifiedTechTask\Billing.Infrastructure\Billing.Infrastructure.csproj", "{CE549F95-4EA4-4A3B-8EEF-D568BBB5783B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E958251E-F336-4433-B10D-CE188BE680C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E958251E-F336-4433-B10D-CE188BE680C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E958251E-F336-4433-B10D-CE188BE680C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E958251E-F336-4433-B10D-CE188BE680C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE549F95-4EA4-4A3B-8EEF-D568BBB5783B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE549F95-4EA4-4A3B-8EEF-D568BBB5783B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE549F95-4EA4-4A3B-8EEF-D568BBB5783B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE549F95-4EA4-4A3B-8EEF-D568BBB5783B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B254A38C-F310-4FE5-B6AF-FA59F91E2816}
+	EndGlobalSection
+EndGlobal
