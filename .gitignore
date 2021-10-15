@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs/Billing.Api
+/Billing.Infrastructure/obj
+/Billing.Api/obj
+/Billing.Infrastructure/bin/Debug/net5.0
