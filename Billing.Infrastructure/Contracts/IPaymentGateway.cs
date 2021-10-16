@@ -1,4 +1,5 @@
 ﻿using Billing.Infrastructure.Contracts.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Billing.Infrastructure.Contracts
@@ -6,9 +7,15 @@ namespace Billing.Infrastructure.Contracts
     public interface IPaymentGateway
     {
         /// <summary>
-        /// Processes the payment asynchronously.
+        /// Processes payment asynchronously.
         /// </summary>
         /// <param name="payment">The payment.</param>
-        Task<IPaymentGatewayResponse> PushPaymentAsync(IPayment payment);
+        Task<IPaymentGatewayResponse> ProcessAsync(IPayment payment);
+
+        /// <summary>
+        /// Processes payments asynchronously.
+        /// </summary>
+        /// <param name="payment">The payment.</param>
+        Task<IPaymentGatewayResponse> PushAsync(IEnumerable<IPayment> payment);
     }
 }
