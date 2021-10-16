@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace Billing.Api
 {
@@ -15,6 +16,12 @@ namespace Billing.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .UseSerilog((host, config) =>
+                {
+                    config
+                        .ReadFrom.Configuration(host.Configuration)
+                        .Enrich.FromLogContext();
                 });
     }
 }
