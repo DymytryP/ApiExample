@@ -16,6 +16,6 @@ namespace Billing.Infrastructure.Contracts
         /// Processes payments asynchronously.
         /// </summary>
         /// <param name="payment">The payment.</param>
-        Task<IPaymentGatewayResponse> PushAsync(IEnumerable<IPayment> payment);
+        Task<IPaymentGatewayResponse> ProcessAsync(IEnumerable<IPayment> payment);
     }
 }
