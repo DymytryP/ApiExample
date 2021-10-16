@@ -4,6 +4,6 @@ namespace Billing.Infrastructure.Contracts
 {
     public interface IDataProcessor<TInput, TOutput>
     {
-        Task<TOutput> ProcessDataAsync(TInput requestData);
+        Task<TOutput> ProcessAsync(TInput requestData);
     }
 }
