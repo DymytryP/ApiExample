@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Billing.Api.Controllers
 {
-    public class PostController<TRequestData> : ControllerBase where TRequestData : IRequestData
+    public abstract class PostController<TRequestData> : ControllerBase where TRequestData : IRequestData
     {
         private readonly IRequestPipeline<TRequestData> requestPipeline;
 
@@ -21,13 +21,13 @@ namespace Billing.Api.Controllers
         }
 
         /// <summary>
-        /// Processes request.
+        /// Processes request data.
         /// </summary>
         /// <param name="requestData">Request data object.</param>
         /// <returns>Result object as JSON</returns>
         [Route("{action}")]
         [HttpPost]
-        public async Task<IActionResult> Process(TRequestData requestData)
+        public virtual async Task<IActionResult> Process(TRequestData requestData)
         {
             await this.requestValidationRules.ValidateAndThrowAsync(requestData);
 
