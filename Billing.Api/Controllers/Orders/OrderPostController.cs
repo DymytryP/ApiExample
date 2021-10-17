@@ -24,13 +24,13 @@ namespace Billing.Api.Controllers
         {
         }
 
-        [Route("api/orders/postOrder")]
+        [Route("postOrder")]
         public async override Task<IActionResult> Process(OrderRequestData requestData)
         {
             return await base.Process(requestData);
         }
 
-        [Route("api/orders/postOrders")]
+        [Route("postOrders")]
         public async override Task<IActionResult> Process(IEnumerable<OrderRequestData> requestData)
         {
             return await base.Process(requestData);
