@@ -29,6 +29,13 @@ namespace Billing.Infrastructure.Validators.Orders
             RuleFor(ord => ord.PaymentGateway)
                 .Must(paymentGateway => Enum.GetNames<PaymentGateway>()
                     .Any(name => name == paymentGateway));
+
+            int minimumItemsCount = 1;
+            int maximumItemsCount = 10;
+            RuleFor(ord => ord.CartItems)
+                .Cascade(CascadeMode.Stop)
+                .Must(cartItems => cartItems.Count >= minimumItemsCount)
+                .Must(cartItems => cartItems.Count <= maximumItemsCount);
         }
     }
 }

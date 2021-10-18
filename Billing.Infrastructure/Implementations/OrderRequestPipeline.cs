@@ -16,19 +16,19 @@ namespace Billing.Infrastructure.Implementations
     {
         private readonly IMapper<(OrderRequestData OrderRequestData, BillingUserDto), OrderDto> dataToOrderMapper;
 
-        private readonly IMapper<(OrderDto, ProductDto, BillingUserDto), Receipt> dataToReceiptMapper;
+        private readonly IMapper<(OrderDto, IEnumerable<ProductDto>, BillingUserDto), Receipt> dataToReceiptMapper;
 
         private readonly ILogger<OrderRequestPipeline> logger;
 
         private readonly IDataDistributor<OrderDto, OrderDistributionResult> orderDataDistributor;
 
-        private readonly IDataAggregator<OrderRequestData, (ProductDto Product, BillingUserDto User)> productUserDataAggregator;
+        private readonly IDataAggregator<OrderRequestData, (IEnumerable<ProductDto> Products, BillingUserDto User)> productUserDataAggregator;
 
         public OrderRequestPipeline(
-            IDataAggregator<OrderRequestData, (ProductDto Product, BillingUserDto User)> productUserDataAggregator,
+            IDataAggregator<OrderRequestData, (IEnumerable<ProductDto> Products, BillingUserDto User)> productUserDataAggregator,
             IMapper<(OrderRequestData OrderRequestData, BillingUserDto), OrderDto> dataToOrderMapper,
             IDataDistributor<OrderDto, OrderDistributionResult> orderDataDistributor,
-            IMapper<(OrderDto, ProductDto, BillingUserDto), Receipt> dataToReceiptMapper,
+            IMapper<(OrderDto, IEnumerable<ProductDto>, BillingUserDto), Receipt> dataToReceiptMapper,
             ILogger<OrderRequestPipeline> logger)
         {
             this.productUserDataAggregator = productUserDataAggregator ?? throw new ArgumentNullException(nameof(productUserDataAggregator));
@@ -45,7 +45,7 @@ namespace Billing.Infrastructure.Implementations
         /// <returns>The processing result model.</returns>
         public async Task<Receipt> ProcessRequestAsync(OrderRequestData requestData)
         {
-            (ProductDto product, BillingUserDto billingUser) = await productUserDataAggregator.AggregateAsync(requestData);
+            (IEnumerable<ProductDto> products, BillingUserDto billingUser) = await productUserDataAggregator.AggregateAsync(requestData);
 
             OrderDto order = dataToOrderMapper.Map((requestData, billingUser));
 
@@ -59,7 +59,7 @@ namespace Billing.Infrastructure.Implementations
             Receipt receipt = null;
             if (dataDistributionResult.PaymentResponseType == PaymentGatewayResponse.Success)
             {
-                receipt = dataToReceiptMapper.Map((order, product, billingUser));
+                receipt = dataToReceiptMapper.Map((order, products, billingUser));
             }
 
             return receipt 
@@ -69,7 +69,7 @@ namespace Billing.Infrastructure.Implementations
         /// <summary>
         /// Not implemented.
         /// </summary>
-        public Task<IEnumerable<Receipt>> ProcessRequestAsync(IEnumerable<OrderRequestData> requestData)
+        public async Task<IEnumerable<Receipt>> ProcessRequestAsync(IEnumerable<OrderRequestData> requestData)
         {
             throw new NotImplementedException();
         }
