@@ -2,6 +2,7 @@
 using Billing.Infrastructure.Models.Orders.RequestData;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -26,16 +27,24 @@ namespace Billing.Api.Controllers
         {
         }
 
+        /// <summary>
+        /// Processes received order request data.
+        /// </summary>
+        /// <param name="requestData">The order.</param>
+        /// <returns>Receipt as JSON.</returns>
         [Route("postOrder")]
         public async override Task<IActionResult> Process(OrderRequestData requestData)
         {
             return await base.Process(requestData);
         }
 
+        /// <summary>
+        /// Not supported. Do not use.
+        /// </summary>
         [Route("postOrders")]
         public async override Task<IActionResult> Process(IEnumerable<OrderRequestData> requestData)
         {
-            return await base.Process(requestData);
+            throw new NotImplementedException();
         }
     }
 }
