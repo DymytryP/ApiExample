@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using Orders = Billing.Infrastructure.Models.Orders;
+
 namespace Billing.Api.Controllers
 {
     /// <summary>
@@ -12,14 +14,14 @@ namespace Billing.Api.Controllers
     /// </summary>
     [Route("api/orders")]
     [ApiController]
-    public class OrderPostController : PostController<OrderRequestData>
+    public class OrderPostController : PostController<OrderRequestData, Orders.Receipt>
     {
         /// <summary>
         /// Initializes the instance of OrderController.
         /// </summary>
         /// <param name="orderProcessor"></param>
         public OrderPostController(
-            IRequestPipeline<OrderRequestData> requestPipeline,
+            IRequestPipeline<OrderRequestData, Orders.Receipt> requestPipeline,
             AbstractValidator<OrderRequestData> requestValidationRules) : base(requestPipeline, requestValidationRules)
         {
         }

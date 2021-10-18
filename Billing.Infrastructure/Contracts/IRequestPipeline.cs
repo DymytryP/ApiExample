@@ -1,13 +1,15 @@
 ﻿using Billing.Infrastructure.Contracts.Models;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Billing.Infrastructure.Contracts
 {
-    public interface IRequestPipeline<TRequestData> where TRequestData : IRequestData
+    public interface IRequestPipeline<TRequestData, TRequestProcessingResult> where TRequestData : IRequestData
     {
-        Task<IRequestDataProcessingResult> ProcessRequestAsync(TRequestData requestData);
-
-        Task<IRequestDataProcessingResult> ProcessRequestAsync(IEnumerable<TRequestData> requestsData)
+        /// <summary>
+        /// Processes request data model asynchronously.
+        /// </summary>
+        /// <param name="requestData">The request data model.</param>
+        /// <returns>The processing result model.</returns>
+        Task<TRequestProcessingResult> ProcessRequestAsync(TRequestData requestData);
     }
 }

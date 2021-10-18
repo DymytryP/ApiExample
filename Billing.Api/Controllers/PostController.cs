@@ -2,23 +2,25 @@
 using Billing.Infrastructure.Contracts.Models;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Billing.Api.Controllers
 {
-    public abstract class PostController<TRequestData> : ControllerBase where TRequestData : IRequestData
+    public abstract class PostController<TRequestData, TRequestProcessingResult> : ControllerBase
+        where TRequestData : IRequestData
     {
-        private readonly IRequestPipeline<TRequestData> requestPipeline;
+        private readonly IRequestPipeline<TRequestData, TRequestProcessingResult> requestPipeline;
 
         private readonly AbstractValidator<TRequestData> requestValidationRules;
 
         public PostController(
-            IRequestPipeline<TRequestData> requestPipeline,
+            IRequestPipeline<TRequestData, TRequestProcessingResult> requestPipeline,
             AbstractValidator<TRequestData> requestValidationRules)
         {
-            this.requestPipeline = requestPipeline;
-            this.requestValidationRules = requestValidationRules;
+            this.requestPipeline = requestPipeline ?? throw new ArgumentNullException(nameof(requestPipeline));
+            this.requestValidationRules = requestValidationRules ?? throw new ArgumentNullException(nameof(requestValidationRules));
         }
 
         /// <summary>
@@ -31,7 +33,7 @@ namespace Billing.Api.Controllers
         {
             await this.requestValidationRules.ValidateAndThrowAsync(requestData);
 
-            var result = await this.requestPipeline.ProcessRequestAsync(requestData);
+            TRequestProcessingResult result = await this.requestPipeline.ProcessRequestAsync(requestData);
 
             return Ok(result);
         }
@@ -49,7 +51,7 @@ namespace Billing.Api.Controllers
                 await this.requestValidationRules.ValidateAndThrowAsync(requestData);
             }
 
-            var result = await this.requestPipeline.ProcessRequestAsync(requestsData);
+            IEnumerable<TRequestProcessingResult> result = await this.requestPipeline.ProcessRequestAsync(requestsData);
 
             return Ok(result);
         }
