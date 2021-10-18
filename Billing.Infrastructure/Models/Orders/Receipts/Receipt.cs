@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Billing.Infrastructure.Models.Orders
+namespace Billing.Infrastructure.Models.Orders.Receipts
 {
     public record Receipt
     {

@@ -3,6 +3,7 @@ using Billing.Infrastructure.Contracts;
 using Billing.Infrastructure.Models.BillingUsers;
 using Billing.Infrastructure.Models.Enums;
 using Billing.Infrastructure.Models.Orders;
+using Billing.Infrastructure.Models.Orders.Receipts;
 using Billing.Infrastructure.Models.Orders.RequestData;
 using Billing.Infrastructure.Models.Products;
 using Microsoft.Extensions.Logging;

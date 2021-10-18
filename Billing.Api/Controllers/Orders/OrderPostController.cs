@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using Orders = Billing.Infrastructure.Models.Orders;
+using Orders = Billing.Infrastructure.Models.Orders.Receipts;
 
 namespace Billing.Api.Controllers
 {
