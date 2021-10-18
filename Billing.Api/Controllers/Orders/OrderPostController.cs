@@ -39,7 +39,7 @@ namespace Billing.Api.Controllers
         }
 
         /// <summary>
-        /// Not supported. Do not use.
+        /// Not implemented. Do not use.
         /// </summary>
         [Route("postOrders")]
         public async override Task<IActionResult> Process(IEnumerable<OrderRequestData> requestData)

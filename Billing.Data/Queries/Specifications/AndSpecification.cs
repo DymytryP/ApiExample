@@ -7,6 +7,7 @@ namespace Billing.Data.Queries.Specification
     public class AndSpecification<T> : Specification<T>
     {
         private readonly Specification<T> _left;
+
         private readonly Specification<T> _right;
 
         public AndSpecification(Specification<T> left, Specification<T> right)
@@ -15,6 +16,7 @@ namespace Billing.Data.Queries.Specification
             _left = left;
         }
 
+        /// <inheritdoc/>
         public override Expression<Func<T, bool>> ToExpression()
         {
             Expression<Func<T, bool>> leftExpression = _left.ToExpression();

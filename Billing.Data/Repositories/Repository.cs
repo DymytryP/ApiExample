@@ -19,8 +19,8 @@ namespace Billing.Data.Repositories
             BillingDbContext context,
             IQueryBuilder<T> queryBuilder)
         {
-            this.context = context;
-            this.queryBuilder = queryBuilder;
+            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            this.queryBuilder = queryBuilder ?? throw new ArgumentNullException(nameof(queryBuilder));
         }
 
         /// <summary>

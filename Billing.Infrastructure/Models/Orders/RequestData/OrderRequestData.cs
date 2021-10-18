@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Billing.Infrastructure.Models.Orders.RequestData
 {
-    public record OrderRequestData : IRequestData
+    public record OrderRequestData
     {
         public long BillingUserId { get; init; }
 

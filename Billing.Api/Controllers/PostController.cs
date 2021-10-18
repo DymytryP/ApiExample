@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace Billing.Api.Controllers
 {
     public abstract class PostController<TRequestData, TRequestProcessingResult> : ControllerBase
-        where TRequestData : IRequestData
     {
         private readonly IRequestPipeline<TRequestData, TRequestProcessingResult> requestPipeline;
 

@@ -1,4 +1,5 @@
-﻿using Billing.Infrastructure.Models.Enums;
+﻿using Billing.Infrastructure.Configuration;
+using Billing.Infrastructure.Models.Enums;
 using Billing.Infrastructure.Models.Orders.RequestData;
 using FluentValidation;
 using System;
@@ -8,34 +9,33 @@ namespace Billing.Infrastructure.Validators.Orders
 {
     public class OrderRequestDataValidator : AbstractValidator<OrderRequestData>
     {
-        public OrderRequestDataValidator()
+        /// <summary>
+        /// Create validator object and set rules for validation.
+        /// </summary>
+        /// <param name="configuration">The billing API configuration.</param>
+        public OrderRequestDataValidator(IBillingApiConfiguration configuration)
         {
-            decimal minimumAmount = 0.01m;
-            decimal maximumAmount = 1000000.00m;
             RuleFor(ord => ord.PayableAmount.Amount)
                 .Cascade(CascadeMode.Stop)
-                .Must(amount => amount >= minimumAmount)
-                .Must(amount => amount <= maximumAmount)
-                .WithMessage($"Amount must be between {minimumAmount} and {maximumAmount}.");
+                .Must(amount => amount >= configuration.MinimumOrderAmount)
+                .Must(amount => amount <= configuration.MaximumOrderAmount)
+                .WithMessage($"Amount must be between {configuration.MinimumOrderAmount}" +
+                    $" and {configuration.MaximumOrderAmount}.");
 
-            int minimumQuantity = 1;
-            int maximumQuantity = 100;
             RuleFor(ord => ord.CartItems)
                 .Must(cartItems => cartItems
                     .All(item =>
-                        item.Quantity >= minimumQuantity
-                        && item.Quantity <= maximumQuantity));
+                        item.Quantity >= configuration.MinimumProductsQuantity
+                        && item.Quantity <= configuration.MaximumProductsQuantity));
 
             RuleFor(ord => ord.PaymentGateway)
                 .Must(paymentGateway => Enum.GetNames<PaymentGateway>()
                     .Any(name => name == paymentGateway));
 
-            int minimumItemsCount = 1;
-            int maximumItemsCount = 10;
             RuleFor(ord => ord.CartItems)
                 .Cascade(CascadeMode.Stop)
-                .Must(cartItems => cartItems.Count >= minimumItemsCount)
-                .Must(cartItems => cartItems.Count <= maximumItemsCount);
+                .Must(cartItems => cartItems.Count >= configuration.MinimumCartItemsCount)
+                .Must(cartItems => cartItems.Count <= configuration.MaximumCartItemsCount);
         }
     }
 }

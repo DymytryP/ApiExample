@@ -18,6 +18,11 @@ namespace Billing.Data.Queries.Mappings
     {
         protected virtual Expression<Func<T, TResult>> MappingExpression { get; set; }
 
+        /// <summary>
+        /// Creates new instance of mapping. Validates provided expression to be member initialization expression
+        /// with one parameter.
+        /// </summary>
+        /// <param name="mappingExpression"></param>
         public Mapping(Expression<Func<T, TResult>> mappingExpression)
         {
             mappingExpression = mappingExpression ?? throw new ArgumentNullException(nameof(mappingExpression));
@@ -37,6 +42,10 @@ namespace Billing.Data.Queries.Mappings
             MappingExpression = mappingExpression;
         }
 
+        /// <summary>
+        /// Provides mapping expression.
+        /// </summary>
+        /// <returns>Mapping expression.</returns>
         public Expression<Func<T, TResult>> ToExpression()
         {
             return MappingExpression;

@@ -11,6 +11,11 @@ namespace Billing.Api
             CreateHostBuilder(args).Build().Run();
         }
 
+        /// <summary>
+        /// Creates host builder
+        /// </summary>
+        /// <param name="args">Host builder creation arguments.</param>
+        /// <returns>Host builder reference.</returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

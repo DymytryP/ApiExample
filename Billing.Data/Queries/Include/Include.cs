@@ -20,13 +20,26 @@ namespace Billing.Data.Queries.Include
             _includes = new List<Expression<Func<T, object>>>();
         }
 
+        /// <summary>
+        /// Provides empty include.
+        /// </summary>
         public static Include<T> Empty => new Include<T>();
 
+        /// <summary>
+        /// Creates include from provided expression.
+        /// </summary>
+        /// <param name="include">Include expression.</param>
+        /// <returns>Include reference.</returns>
         public static Include<T> Create(Expression<Func<T, object>> include)
         {
             return Empty.Add(include);
         }
 
+        /// <summary>
+        /// Add additional include.
+        /// </summary>
+        /// <param name="include">Include expression.</param>
+        /// <returns>Include reference.</returns>
         public Include<T> Add(Expression<Func<T, object>> include)
         {
             _includes.Add(include);
@@ -34,6 +47,10 @@ namespace Billing.Data.Queries.Include
             return this;
         }
 
+        /// <summary>
+        /// Gets contained includes.
+        /// </summary>
+        /// <returns>Reference to all contained includes.</returns>
         public List<Expression<Func<T, object>>> GetIncludes()
         {
             return _includes;

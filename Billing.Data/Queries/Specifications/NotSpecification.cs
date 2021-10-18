@@ -13,6 +13,7 @@ namespace Billing.Data.Queries.Specification
             _specification = specification;
         }
 
+        /// <inheritdoc/>
         public override Expression<Func<T, bool>> ToExpression()
         {
             var specificationExpression = _specification.ToExpression();

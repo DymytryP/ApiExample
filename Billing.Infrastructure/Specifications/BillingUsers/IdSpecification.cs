@@ -14,6 +14,7 @@ namespace Billing.Infrastructure.Specifications.BillingUsers
             this.id = id;
         }
 
+        /// <inheritdoc/>
         public override Expression<Func<BillingUser, bool>> ToExpression()
         {
             return billingUser => billingUser.Id == id;

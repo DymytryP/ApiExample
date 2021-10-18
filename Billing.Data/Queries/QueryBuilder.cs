@@ -12,6 +12,7 @@ namespace Billing.Data.Queries
 {
     public class QueryBuilder<T> : IQueryBuilder<T> where T : class
     {
+        /// <inheritdoc/>
         public IQueryable<T> BuildQuery(
             IQueryable<T> baseQuery,
             Specification<T> specification,
@@ -32,6 +33,7 @@ namespace Billing.Data.Queries
             return filteredQuery;
         }
 
+        /// <inheritdoc/>
         public IQueryable<TResult> BuildQuery<TResult>(
             IQueryable<T> baseQuery,
             Specification<T> specification,

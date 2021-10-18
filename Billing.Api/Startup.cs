@@ -18,6 +18,10 @@ namespace Billing.Api
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Configures services.
+        /// </summary>
+        /// <param name="services">Services to add to.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -32,6 +36,11 @@ namespace Billing.Api
             services.AddScoped<IBillingApiConfiguration>(services => billingApiConfiguration);
         }
 
+        /// <summary>
+        /// Configures application.
+        /// </summary>
+        /// <param name="app">The application builder.</param>
+        /// <param name="env">The environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

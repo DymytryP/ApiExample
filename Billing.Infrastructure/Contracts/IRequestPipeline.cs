@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Billing.Infrastructure.Contracts
 {
-    public interface IRequestPipeline<TRequestData, TRequestProcessingResult> where TRequestData : IRequestData
+    public interface IRequestPipeline<TRequestData, TRequestProcessingResult>
     {
         /// <summary>
         /// Processes request data model asynchronously.

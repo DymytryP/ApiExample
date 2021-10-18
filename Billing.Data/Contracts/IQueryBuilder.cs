@@ -8,7 +8,7 @@ namespace Billing.Data.Contracts
     public interface IQueryBuilder<T> where T : class
     {
         /// <summary>
-        /// Builds LINQ query.
+        /// Builds LINQ query for entity.
         /// </summary>
         /// <param name="baseQuery">Base LINQ query</param>
         /// <param name="specification">The specification to filter data.</param>
@@ -20,7 +20,7 @@ namespace Billing.Data.Contracts
             Include<T> include = null);
 
         /// <summary>
-        /// Builds LINQ query.
+        /// Builds LINQ query for DTO.
         /// </summary>
         /// <param name="baseQuery">Base LINQ query</param>
         /// <param name="specification">The specification to filter data.</param>

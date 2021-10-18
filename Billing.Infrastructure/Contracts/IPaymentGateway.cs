@@ -4,18 +4,18 @@ using System.Threading.Tasks;
 
 namespace Billing.Infrastructure.Contracts
 {
-    public interface IPaymentGateway
+    public interface IPaymentGateway<TPayment>
     {
         /// <summary>
         /// Processes payment asynchronously.
         /// </summary>
         /// <param name="payment">The payment.</param>
-        Task<IPaymentGatewayResponse> ProcessAsync(IPayment payment);
+        Task<IPaymentGatewayResponse> ProcessAsync(TPayment payment);
 
         /// <summary>
         /// Processes payments asynchronously.
         /// </summary>
         /// <param name="payments">Payments.</param>
-        Task<IPaymentGatewayResponse> ProcessAsync(IEnumerable<IPayment> payments);
+        Task<IPaymentGatewayResponse> ProcessAsync(IEnumerable<TPayment> payments);
     }
 }

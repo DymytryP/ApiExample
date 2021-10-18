@@ -14,18 +14,37 @@ namespace Billing.Data.Queries.Specification
     /// </summary>
     public abstract class Specification<T>
     {
+        /// <summary>
+        /// Creates expression tree.
+        /// </summary>
+        /// <returns>The expression tree.</returns>
         public abstract Expression<Func<T, bool>> ToExpression();
 
+        /// <summary>
+        /// Composes specifications with AND.
+        /// </summary>
+        /// <param name="specification">Specification to add.</param>
+        /// <returns>Composed AND specification.</returns>
         public Specification<T> And(Specification<T> specification)
         {
             return new AndSpecification<T>(this, specification);
         }
 
+        /// <summary>
+        /// Composes specifications with OR.
+        /// </summary>
+        /// <param name="specification">Specification to add.</param>
+        /// <returns>Composed OR specification.</returns>
         public Specification<T> Or(Specification<T> specification)
         {
             return new OrSpecification<T>(this, specification);
         }
 
+        /// <summary>
+        /// Inverts specification condition.
+        /// </summary>
+        /// <param name="specification">Specification to invert.</param>
+        /// <returns>Inverted specification.</returns>
         public Specification<T> Not()
         {
             return new NotSpecification<T>(this);

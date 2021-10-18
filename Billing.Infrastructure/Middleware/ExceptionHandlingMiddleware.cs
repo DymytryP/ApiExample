@@ -10,9 +10,6 @@ using System.Threading.Tasks;
 
 namespace Billing.Infrastructure.Middleware
 {
-    /// <summary>
-    /// The exception handling middleware class. Provides global exception handling for running host.
-    /// </summary>
     public class ExceptionHandlingMiddleware
     {
         private readonly RequestDelegate next;
