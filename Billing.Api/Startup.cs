@@ -1,4 +1,3 @@
-using Billing.Api.Configuration;
 using Billing.Infrastructure.Common.Extensions;
 using Billing.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Builder;
