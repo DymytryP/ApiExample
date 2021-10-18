@@ -27,13 +27,13 @@ namespace Billing.Api.Controllers
         /// Processes request data.
         /// </summary>
         /// <param name="requestData">Request data object.</param>
-        /// <returns>Result object as JSON</returns>
+        /// <returns>Result object as JSON.</returns>
         [HttpPost]
         public virtual async Task<IActionResult> Process(TRequestData requestData)
         {
-            await this.requestValidationRules.ValidateAndThrowAsync(requestData);
+            await requestValidationRules.ValidateAndThrowAsync(requestData);
 
-            TRequestProcessingResult result = await this.requestPipeline.ProcessRequestAsync(requestData);
+            TRequestProcessingResult result = await requestPipeline.ProcessRequestAsync(requestData);
 
             return Ok(result);
         }
@@ -42,16 +42,16 @@ namespace Billing.Api.Controllers
         /// Processes requests data.
         /// </summary>
         /// <param name="requestsData">Requests data object.</param>
-        /// <returns>Result object as JSON</returns>
+        /// <returns>Result object as JSON.</returns>
         [HttpPost]
         public virtual async Task<IActionResult> Process(IEnumerable<TRequestData> requestsData)
         {
             foreach (TRequestData requestData in requestsData)
             {
-                await this.requestValidationRules.ValidateAndThrowAsync(requestData);
+                await requestValidationRules.ValidateAndThrowAsync(requestData);
             }
 
-            IEnumerable<TRequestProcessingResult> result = await this.requestPipeline.ProcessRequestAsync(requestsData);
+            IEnumerable<TRequestProcessingResult> result = await requestPipeline.ProcessRequestAsync(requestsData);
 
             return Ok(result);
         }

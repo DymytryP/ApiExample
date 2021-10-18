@@ -1,4 +1,5 @@
 ﻿using Billing.Infrastructure.Contracts.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Billing.Infrastructure.Contracts
@@ -11,5 +12,12 @@ namespace Billing.Infrastructure.Contracts
         /// <param name="requestData">The request data model.</param>
         /// <returns>The processing result model.</returns>
         Task<TRequestProcessingResult> ProcessRequestAsync(TRequestData requestData);
+
+        /// <summary>
+        /// Processes request data models asynchronously.
+        /// </summary>
+        /// <param name="requestData">The request data models.</param>
+        /// <returns>The processing result models.</returns>
+        Task<IEnumerable<TRequestProcessingResult>> ProcessRequestAsync(IEnumerable<TRequestData> requestData);
     }
 }

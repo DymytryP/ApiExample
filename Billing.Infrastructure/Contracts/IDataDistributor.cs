@@ -2,8 +2,13 @@
 
 namespace Billing.Infrastructure.Contracts
 {
-    public interface IDataDistributor<T>
+    public interface IDataDistributor<TData, TDistributionResult>
     {
-        Task PushAsync(T data);
+        /// <summary>
+        /// Pushes data to data targets.
+        /// </summary>
+        /// <param name="data">The data to push.</param>
+        /// <returns>The response</returns>
+        Task<TDistributionResult> PushAsync(TData data);
     }
 }

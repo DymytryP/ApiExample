@@ -1,8 +1,8 @@
 ﻿namespace Billing.Infrastructure.Models.Enums
 {
-    public enum OperationResult
+    public enum PaymentGatewayResponse
     {
         Failure = -1,
-        Success = 1
+        Success = 0
     }
 }

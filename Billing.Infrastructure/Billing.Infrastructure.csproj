@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Implementations\" />
+    <ProjectReference Include="..\Billing.Data.Models\Billing.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>
