@@ -39,13 +39,6 @@ namespace Billing.Api
         /// <param name="env">The environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Billing.Api v1"));
-            }
-
             app.UseGlobalExceptionMiddleware();
             app.UseHttpsRedirection();
             app.UseRouting();
