@@ -10,10 +10,10 @@ namespace Billing.Infrastructure.Validators.Orders
     public class OrderRequestDataValidator : AbstractValidator<OrderRequestData>
     {
         /// <summary>
-        /// Create validator object and set rules for validation.
+        /// Creates validator object and sets rules for validation.
         /// </summary>
         /// <param name="configuration">The billing API configuration.</param>
-        public OrderRequestDataValidator(IBillingApiConfiguration configuration)
+        public OrderRequestDataValidator(IBillingApiConfiguration configuration) : base()
         {
             RuleFor(ord => ord.PayableAmount.Amount)
                 .Cascade(CascadeMode.Stop)

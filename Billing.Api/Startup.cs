@@ -1,5 +1,4 @@
 using Billing.Infrastructure.Common.Extensions;
-using Billing.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,10 +29,7 @@ namespace Billing.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Billing.Api", Version = "v1" });
             });
 
-            var billingApiConfiguration = Configuration
-                .GetSection(nameof(BillingApiConfiguration))
-                .Get<BillingApiConfiguration>(binderOptions => binderOptions.BindNonPublicProperties = true);
-            services.AddScoped<IBillingApiConfiguration>(services => billingApiConfiguration);
+            services.RegisterServices(Configuration);
         }
 
         /// <summary>
@@ -51,9 +47,9 @@ namespace Billing.Api
             }
 
             app.UseGlobalExceptionMiddleware();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseAuthorization();
+            //app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

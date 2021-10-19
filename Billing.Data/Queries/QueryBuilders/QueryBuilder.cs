@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Billing.Data.Queries
+namespace Billing.Data.Queries.QueryBuilders
 {
     public class QueryBuilder<T> : IQueryBuilder<T> where T : class
     {

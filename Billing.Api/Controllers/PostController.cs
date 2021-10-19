@@ -1,5 +1,4 @@
 ﻿using Billing.Infrastructure.Contracts;
-using Billing.Infrastructure.Contracts.Models;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -30,7 +29,7 @@ namespace Billing.Api.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> Process(TRequestData requestData)
         {
-            await requestValidationRules.ValidateAndThrowAsync(requestData);
+            requestValidationRules.ValidateAndThrow(requestData);
 
             TRequestProcessingResult result = await requestPipeline.ProcessRequestAsync(requestData);
 
@@ -43,7 +42,7 @@ namespace Billing.Api.Controllers
         /// <param name="requestsData">Requests data object.</param>
         /// <returns>Result object as JSON.</returns>
         [HttpPost]
-        public virtual async Task<IActionResult> Process(IEnumerable<TRequestData> requestsData)
+        public virtual async Task<IActionResult> Process([FromBody] IEnumerable<TRequestData> requestsData)
         {
             foreach (TRequestData requestData in requestsData)
             {

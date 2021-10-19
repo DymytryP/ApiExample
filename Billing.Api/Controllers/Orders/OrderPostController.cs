@@ -33,7 +33,7 @@ namespace Billing.Api.Controllers
         /// <param name="requestData">The order.</param>
         /// <returns>Receipt as JSON.</returns>
         [Route("postOrder")]
-        public async override Task<IActionResult> Process(OrderRequestData requestData)
+        public async override Task<IActionResult> Process([FromBody]OrderRequestData requestData)
         {
             return await base.Process(requestData);
         }
