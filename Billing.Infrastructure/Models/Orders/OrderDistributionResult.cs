@@ -5,8 +5,8 @@ namespace Billing.Infrastructure.Models.Orders
 {
     public record OrderDistributionResult
     {
-        public PaymentGatewayResponse PaymentResponseType { get; init; }
+        public PaymentGatewayResponse PaymentResponseType { get; set; }
 
-        public DatabaseSaveOperationResult DatabaseSaveOperationResult { get; init; }
+        public DatabaseSaveOperationResult DatabaseSaveOperationResult { get; set; }
     }
 }

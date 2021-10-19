@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Billing.Infrastructure.Models.Orders.Receipts
 {
@@ -9,6 +10,8 @@ namespace Billing.Infrastructure.Models.Orders.Receipts
         public CurrencyAmount CurrencyAmount { get; init; }
 
         public string OrderNumber { get; init; }
+
+        public List<ReceiptLine> ReceiptLines { get; init; }
 
         public Requisites Requisites { get; init; }
     }

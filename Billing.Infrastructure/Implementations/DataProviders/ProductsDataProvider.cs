@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Billing.Infrastructure.Implementations
+namespace Billing.Infrastructure.Implementations.DataProviders
 {
     public class ProductsDataProvider : RestClient, IDataProvider<IEnumerable<long>, IEnumerable<ProductDto>>
     {

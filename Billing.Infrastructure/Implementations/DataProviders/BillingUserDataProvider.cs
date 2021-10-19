@@ -9,7 +9,7 @@ using Billing.Infrastructure.Specifications.BillingUsers;
 using System;
 using System.Threading.Tasks;
 
-namespace Billing.Infrastructure.Implementations
+namespace Billing.Infrastructure.Implementations.DataProviders
 {
     public class BillingUserDataProvider : Repository<BillingUser>, IDataProvider<long, BillingUserDto>
     {

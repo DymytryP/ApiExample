@@ -1,6 +1,6 @@
 ﻿namespace Billing.Infrastructure.Models.Enums
 {
-    public enum PaymentGateway
+    public enum PaymentProvider
     {
         Visa,
         Mastercard,

@@ -1,5 +1,4 @@
-﻿using Billing.Infrastructure.Contracts.Models;
-using Billing.Infrastructure.Models.Carts;
+﻿using Billing.Infrastructure.Models.Carts;
 using System.Collections.Generic;
 
 namespace Billing.Infrastructure.Models.Orders.RequestData
@@ -14,7 +13,7 @@ namespace Billing.Infrastructure.Models.Orders.RequestData
 
         public CurrencyAmount PayableAmount { get; init; }
 
-        public string PaymentGateway { get; init; }
+        public string PaymentProvider { get; init; }
 
         public List<CartItem> CartItems { get; init; }
     }

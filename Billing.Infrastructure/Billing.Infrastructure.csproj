@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Billing.Data\Billing.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contracts\Models\" />
+  </ItemGroup>
+
 </Project>

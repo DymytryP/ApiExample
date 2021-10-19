@@ -1,21 +1,15 @@
-﻿using Billing.Infrastructure.Contracts.Models;
-using System.Collections.Generic;
+﻿using Billing.Infrastructure.Models.Enums;
+using Billing.Infrastructure.Models.Payments;
 using System.Threading.Tasks;
 
 namespace Billing.Infrastructure.Contracts
 {
-    public interface IPaymentGateway<TPayment>
+    public interface IPaymentGateway
     {
         /// <summary>
         /// Processes payment asynchronously.
         /// </summary>
         /// <param name="payment">The payment.</param>
-        Task<IPaymentGatewayResponse> ProcessAsync(TPayment payment);
-
-        /// <summary>
-        /// Processes payments asynchronously.
-        /// </summary>
-        /// <param name="payments">Payments.</param>
-        Task<IPaymentGatewayResponse> ProcessAsync(IEnumerable<TPayment> payments);
+        Task<PaymentGatewayResponse> ProcessAsync(Payment payment);
     }
 }

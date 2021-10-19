@@ -15,9 +15,9 @@ namespace Billing.Infrastructure.Implementations
 {
     public class OrderRequestPipeline : IRequestPipeline<OrderRequestData, Receipt>
     {
-        private readonly IMapper<(OrderRequestData OrderRequestData, BillingUserDto), OrderDto> dataToOrderMapper;
+        private readonly IMapper<(OrderRequestData OrderRequestData, IEnumerable<ProductDto> Products), OrderDto> orderRequestDataToOrderMapper;
 
-        private readonly IMapper<(OrderDto, IEnumerable<ProductDto>, BillingUserDto), Receipt> dataToReceiptMapper;
+        private readonly IMapper<(OrderDto OrderDto, BillingUserDto BillingUserDto), Receipt> dataToReceiptMapper;
 
         private readonly ILogger<OrderRequestPipeline> logger;
 
@@ -27,16 +27,16 @@ namespace Billing.Infrastructure.Implementations
 
         public OrderRequestPipeline(
             IDataAggregator<OrderRequestData, (IEnumerable<ProductDto> Products, BillingUserDto User)> productUserDataAggregator,
-            IMapper<(OrderRequestData OrderRequestData, BillingUserDto), OrderDto> dataToOrderMapper,
+            IMapper<(OrderRequestData OrderRequestData, IEnumerable<ProductDto> Products), OrderDto> orderRequestDataToOrderMapper,
             IDataDistributor<OrderDto, OrderDistributionResult> orderDataDistributor,
-            IMapper<(OrderDto, IEnumerable<ProductDto>, BillingUserDto), Receipt> dataToReceiptMapper,
+            IMapper<(OrderDto OrderDto, BillingUserDto BillingUserDto), Receipt> dataToReceiptMapper,
             ILogger<OrderRequestPipeline> logger)
         {
             this.productUserDataAggregator = productUserDataAggregator ?? throw new ArgumentNullException(nameof(productUserDataAggregator));
-            this.dataToOrderMapper = dataToOrderMapper ?? throw new ArgumentNullException(nameof(dataToOrderMapper));
+            this.orderRequestDataToOrderMapper = orderRequestDataToOrderMapper ?? throw new ArgumentNullException(nameof(orderRequestDataToOrderMapper));
             this.orderDataDistributor = orderDataDistributor ?? throw new ArgumentNullException(nameof(orderDataDistributor));
             this.dataToReceiptMapper = dataToReceiptMapper ?? throw new ArgumentNullException(nameof(dataToReceiptMapper));
-            this.logger = logger;
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Billing.Infrastructure.Implementations
         {
             (IEnumerable<ProductDto> products, BillingUserDto billingUser) = await productUserDataAggregator.AggregateAsync(requestData);
 
-            OrderDto order = dataToOrderMapper.Map((requestData, billingUser));
+            OrderDto order = orderRequestDataToOrderMapper.Map((requestData, products));
 
             var dataDistributionResult = await orderDataDistributor.PushAsync(order);
 
@@ -60,7 +60,7 @@ namespace Billing.Infrastructure.Implementations
             Receipt receipt = null;
             if (dataDistributionResult.PaymentResponseType == PaymentGatewayResponse.Success)
             {
-                receipt = dataToReceiptMapper.Map((order, products, billingUser));
+                receipt = dataToReceiptMapper.Map((order, billingUser));
             }
 
             return receipt 

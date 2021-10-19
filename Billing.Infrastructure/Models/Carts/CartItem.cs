@@ -1,6 +1,6 @@
 ﻿namespace Billing.Infrastructure.Models.Carts
 {
-    public class CartItem
+    public record CartItem
     {
         public long ProductId { get; init; }
 

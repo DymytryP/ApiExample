@@ -28,8 +28,8 @@ namespace Billing.Infrastructure.Validators.Orders
                         item.Quantity >= configuration.MinimumProductsQuantity
                         && item.Quantity <= configuration.MaximumProductsQuantity));
 
-            RuleFor(ord => ord.PaymentGateway)
-                .Must(paymentGateway => Enum.GetNames<PaymentGateway>()
+            RuleFor(ord => ord.PaymentProvider)
+                .Must(paymentGateway => Enum.GetNames<PaymentProvider>()
                     .Any(name => name == paymentGateway));
 
             RuleFor(ord => ord.CartItems)
