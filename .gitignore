@@ -13,3 +13,7 @@
 /Billing.Data.Models/bin/Debug/net5.0
 /Billing.Api/bin/Debug/net5.0
 /Billing.Api/logs
+/Billing.Infrastructure.Tests/obj
+/Billing.Infrastructure.Tests/bin/Debug/net5.0
+/Billing.Tests.Common/obj
+/Billing.Tests.Common/bin/Debug/net5.0
