@@ -2,7 +2,6 @@
 {
     public enum Currency
     {
-        EUR,
-        CHF
+        EUR
     }
 }
