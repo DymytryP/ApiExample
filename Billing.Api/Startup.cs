@@ -47,9 +47,9 @@ namespace Billing.Api
             }
 
             app.UseGlobalExceptionMiddleware();
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseRouting();
-            //app.UseAuthorization();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
